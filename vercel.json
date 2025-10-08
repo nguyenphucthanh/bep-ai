@@ -1,0 +1,8 @@
+{
+	"rewrites": [
+		{
+			"source": "/__/auth/:path*",
+			"destination": "https://bep-ai-8ee1a.firebaseapp.com/__/auth/:path*"
+		}
+	]
+}
