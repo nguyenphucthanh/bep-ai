@@ -1,0 +1,213 @@
+{
+  "buildManifest": {
+    "serverBundles": {
+      "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0": {
+        "id": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+        "file": "build/server/nodejs_eyJydW50aW1lIjoibm9kZWpzIn0/index.js",
+        "config": {
+          "runtime": "nodejs"
+        }
+      }
+    },
+    "routeIdToServerBundleId": {
+      "root": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "home": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "date.index": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "date.chat": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/login": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/logout": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0"
+    },
+    "routes": {
+      "root": {
+        "id": "root",
+        "file": "app/root.tsx",
+        "path": "",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "auth": {
+        "id": "auth",
+        "parentId": "root",
+        "file": "app/routes/auth.tsx",
+        "config": {}
+      },
+      "app-shell": {
+        "id": "app-shell",
+        "parentId": "auth",
+        "file": "app/routes/app-shell.tsx",
+        "config": {}
+      },
+      "home": {
+        "id": "home",
+        "parentId": "app-shell",
+        "file": "app/routes/home.tsx",
+        "index": true,
+        "config": {}
+      },
+      "date": {
+        "id": "date",
+        "parentId": "app-shell",
+        "file": "app/routes/$date.tsx",
+        "path": ":date",
+        "config": {}
+      },
+      "date.index": {
+        "id": "date.index",
+        "parentId": "date",
+        "file": "app/routes/$date.index.tsx",
+        "index": true,
+        "config": {}
+      },
+      "date.chat": {
+        "id": "date.chat",
+        "parentId": "date",
+        "file": "app/routes/$date.chat.tsx",
+        "path": "chat",
+        "config": {}
+      },
+      "routes/login": {
+        "id": "routes/login",
+        "parentId": "auth",
+        "file": "app/routes/login.tsx",
+        "path": "login",
+        "config": {}
+      },
+      "routes/logout": {
+        "id": "routes/logout",
+        "parentId": "auth",
+        "file": "app/routes/logout.tsx",
+        "path": "logout",
+        "config": {}
+      }
+    }
+  },
+  "reactRouterConfig": {
+    "appDirectory": "/Users/thanh/Projects/personal/bep-ai/app",
+    "basename": "/",
+    "buildDirectory": "/Users/thanh/Projects/personal/bep-ai/build",
+    "future": {
+      "v8_middleware": false,
+      "unstable_optimizeDeps": false,
+      "unstable_splitRouteModules": false,
+      "unstable_subResourceIntegrity": false,
+      "unstable_viteEnvironmentApi": false
+    },
+    "routes": {
+      "root": {
+        "id": "root",
+        "file": "root.tsx",
+        "path": ""
+      },
+      "auth": {
+        "id": "auth",
+        "parentId": "root",
+        "file": "routes/auth.tsx"
+      },
+      "app-shell": {
+        "id": "app-shell",
+        "parentId": "auth",
+        "file": "routes/app-shell.tsx"
+      },
+      "home": {
+        "id": "home",
+        "parentId": "app-shell",
+        "file": "routes/home.tsx",
+        "index": true
+      },
+      "date": {
+        "id": "date",
+        "parentId": "app-shell",
+        "file": "routes/$date.tsx",
+        "path": ":date"
+      },
+      "date.index": {
+        "id": "date.index",
+        "parentId": "date",
+        "file": "routes/$date.index.tsx",
+        "index": true
+      },
+      "date.chat": {
+        "id": "date.chat",
+        "parentId": "date",
+        "file": "routes/$date.chat.tsx",
+        "path": "chat"
+      },
+      "routes/login": {
+        "id": "routes/login",
+        "parentId": "auth",
+        "file": "routes/login.tsx",
+        "path": "login"
+      },
+      "routes/logout": {
+        "id": "routes/logout",
+        "parentId": "auth",
+        "file": "routes/logout.tsx",
+        "path": "logout"
+      }
+    },
+    "routeDiscovery": {
+      "mode": "lazy",
+      "manifestPath": "/__manifest"
+    },
+    "serverBuildFile": "index.js",
+    "serverModuleFormat": "esm",
+    "ssr": true,
+    "unstable_routeConfig": [
+      {
+        "id": "root",
+        "path": "",
+        "file": "root.tsx",
+        "children": [
+          {
+            "file": "routes/auth.tsx",
+            "children": [
+              {
+                "file": "routes/app-shell.tsx",
+                "children": [
+                  {
+                    "file": "routes/home.tsx",
+                    "index": true,
+                    "id": "home"
+                  },
+                  {
+                    "file": "routes/$date.tsx",
+                    "children": [
+                      {
+                        "file": "routes/$date.index.tsx",
+                        "index": true,
+                        "id": "date.index"
+                      },
+                      {
+                        "file": "routes/$date.chat.tsx",
+                        "path": "chat",
+                        "id": "date.chat"
+                      }
+                    ],
+                    "path": ":date",
+                    "id": "date"
+                  }
+                ],
+                "id": "app-shell"
+              },
+              {
+                "file": "routes/login.tsx",
+                "path": "login"
+              },
+              {
+                "file": "routes/logout.tsx",
+                "path": "logout"
+              }
+            ],
+            "id": "auth"
+          }
+        ]
+      }
+    ]
+  },
+  "viteConfig": {
+    "build": {
+      "assetsDir": "assets"
+    }
+  }
+}
