@@ -33,7 +33,12 @@ import {
 import { Button } from "~/components/ui/button";
 import { ScrollArea } from "~/components/ui/scroll-area";
 import { toast } from "sonner";
-import { createMenuByDate, getMenuByDate, updateMenuByDate } from "~/lib/menu";
+import {
+  createMenuByDate,
+  deleteMenuByDate,
+  getMenuByDate,
+  updateMenuByDate,
+} from "~/lib/menu";
 import { DateNavigator } from "~/components/shared/date-navigator";
 
 export async function clientLoader({ params }: Route.ClientLoaderArgs) {
@@ -66,8 +71,14 @@ export async function action({ request }: Route.ActionArgs) {
 export async function clientAction({
   serverAction,
   params,
+  request,
 }: Route.ClientActionArgs) {
+  const requestMethod = request.method.toLowerCase();
   const date = parse(params.date, DATE_TIME_FORMAT.ISO_DATE, new Date());
+  if (requestMethod === "delete") {
+    await deleteMenuByDate(date);
+    return [];
+  }
   const newMessages = await serverAction();
   await updateMenuByDate(date, {
     chatMessages: newMessages,

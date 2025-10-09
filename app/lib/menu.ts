@@ -1,6 +1,6 @@
 import { db } from "~/firebase";
 import { DATE_TIME_FORMAT, formatDateTime } from "./datetime";
-import { doc, getDoc, setDoc, Timestamp } from "firebase/firestore";
+import { deleteDoc, doc, getDoc, setDoc, Timestamp } from "firebase/firestore";
 import type { MenuByDate } from "~/types/data";
 
 export const getMenuByDate = async (date: Date) => {
@@ -38,4 +38,10 @@ export const updateMenuByDate = async (
       ...data,
     });
   }
+};
+
+export const deleteMenuByDate = async (date: Date) => {
+  const path = formatDateTime(date, DATE_TIME_FORMAT.ISO_DATE);
+  const docRef = doc(db, "menus", path);
+  await deleteDoc(docRef);
 };

@@ -1,4 +1,4 @@
-import { ArrowUpIcon } from "lucide-react";
+import { ArrowUpIcon, Delete } from "lucide-react";
 import { useState, type FC } from "react";
 import {
   InputGroup,
@@ -10,16 +10,23 @@ import {
 
 export type ChatInputProps = {
   onSubmit: (content: string) => Promise<void>;
+  onDelete: () => Promise<void>;
   isLoading: boolean;
 };
 
-export const ChatInput: FC<ChatInputProps> = ({ onSubmit, isLoading }) => {
+export const ChatInput: FC<ChatInputProps> = ({
+  onSubmit,
+  onDelete,
+  isLoading,
+}) => {
   const [content, setContent] = useState("");
+
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     onSubmit(content);
     setContent("");
   };
+
   const keyDownHandler = (e: React.KeyboardEvent) => {
     // if user hit enter without shift/control/etc... then submit form
     if (e.key === "Enter" && !e.shiftKey && !e.ctrlKey && !e.altKey) {
@@ -28,6 +35,7 @@ export const ChatInput: FC<ChatInputProps> = ({ onSubmit, isLoading }) => {
       setContent("");
     }
   };
+
   return (
     <form onSubmit={submitHandler}>
       <InputGroup>
@@ -40,6 +48,17 @@ export const ChatInput: FC<ChatInputProps> = ({ onSubmit, isLoading }) => {
           className="max-h-[200px]"
         />
         <InputGroupAddon align="block-end">
+          <InputGroupButton
+            variant="destructive"
+            className="rounded-full"
+            size="xs"
+            type="button"
+            disabled={isLoading}
+            onClick={onDelete}
+          >
+            <Delete />
+            Xóa menu hôm nay
+          </InputGroupButton>
           <InputGroupText className="ml-auto">Gửi</InputGroupText>
           <InputGroupButton
             variant="default"

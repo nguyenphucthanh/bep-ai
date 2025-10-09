@@ -53,13 +53,13 @@ export async function clientAction({
   params,
   serverAction,
 }: Route.ClientActionArgs) {
+  const date = parse(params.date, DATE_TIME_FORMAT.ISO_DATE, new Date());
   const parsedMenu = await serverAction();
 
   if (!parsedMenu) {
     throw new Error("Invalid menu data");
   }
 
-  const date = parse(params.date, DATE_TIME_FORMAT.ISO_DATE, new Date());
   await updateMenuByDate(date, {
     menu: parsedMenu,
   });
