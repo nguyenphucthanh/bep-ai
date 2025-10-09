@@ -19,4 +19,7 @@ export default [
     route("login", "routes/login.tsx"),
     route("logout", "routes/logout.tsx"),
   ]),
+  layout("routes/public-app-shell.tsx", {id: "public-app-shell"}, [
+    route("menu/:date", "routes/public/$date.tsx", {id: "public.date"})
+  ])
 ] satisfies RouteConfig;

@@ -76,43 +76,37 @@ export default function Home({ loaderData }: Route.ComponentProps) {
       <h2 className="text-xl">
         {formatDateTime(today, DATE_TIME_FORMAT.DATE)}
       </h2>
-      <Item className="mt-4 shadow-lg" variant={"outline"}>
-        <ItemMedia>
-          <ChefHat />
-        </ItemMedia>
-        {todayMenu?.menu?.content ? (
-          <>
-            <ItemContent>
-              <ItemTitle>
-                <strong className="font-bold">
-                  {todayMenu?.menu?.summary}
-                </strong>
-              </ItemTitle>
-            </ItemContent>
-            <ItemActions>
-              <Button asChild variant={"link"}>
-                <Link to={`/${todayMenu.dateString}`}>
-                  <ChevronRight />
-                </Link>
-              </Button>
-            </ItemActions>
-          </>
-        ) : (
-          <>
-            <ItemContent>
-              <ItemTitle>Hôm nay chưa có thực đơn</ItemTitle>
-            </ItemContent>
-            <ItemActions>
-              <Button asChild title="Chat với Bếp AI">
-                <Link
-                  to={`/${formatDateTime(today, DATE_TIME_FORMAT.ISO_DATE)}/chat`}
-                >
-                  <Sparkle />
-                </Link>
-              </Button>
-            </ItemActions>
-          </>
-        )}
+      <Item className="mt-4 shadow-lg" variant={"outline"} asChild>
+        <Link
+          to={`/${formatDateTime(today, DATE_TIME_FORMAT.ISO_DATE)}/${todayMenu?.menu?.content ? "" : "chat"}`}
+        >
+          <ItemMedia>
+            <ChefHat />
+          </ItemMedia>
+          {todayMenu?.menu?.content ? (
+            <>
+              <ItemContent>
+                <ItemTitle>
+                  <strong className="font-bold">
+                    {todayMenu?.menu?.summary}
+                  </strong>
+                </ItemTitle>
+              </ItemContent>
+              <ItemActions>
+                <ChevronRight />
+              </ItemActions>
+            </>
+          ) : (
+            <>
+              <ItemContent>
+                <ItemTitle>Hôm nay chưa có thực đơn</ItemTitle>
+              </ItemContent>
+              <ItemActions>
+                <Sparkle />
+              </ItemActions>
+            </>
+          )}
+        </Link>
       </Item>
       <h3 className="text-2xl mt-4 flex items-center gap-4 justify-between">
         Lịch 7 ngày

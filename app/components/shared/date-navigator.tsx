@@ -11,11 +11,16 @@ import {
 } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
 export type DateNavigatorProps = {
+  basePath?: string;
   pathSuffix?: string;
   date: Date;
 };
 
-export const DateNavigator: FC<DateNavigatorProps> = ({ date, pathSuffix }) => {
+export const DateNavigator: FC<DateNavigatorProps> = ({
+  basePath = "",
+  pathSuffix = "",
+  date,
+}) => {
   const previewDate = addDays(date, -1);
   const nextDate = addDays(date, 1);
   const navigate = useNavigate();
@@ -23,7 +28,7 @@ export const DateNavigator: FC<DateNavigatorProps> = ({ date, pathSuffix }) => {
     <div className="flex items-center justify-center gap-4">
       <Button asChild variant={"outline"}>
         <Link
-          to={`/${formatDateTime(previewDate, DATE_TIME_FORMAT.ISO_DATE)}/${pathSuffix ?? ""}`}
+          to={`${basePath}/${formatDateTime(previewDate, DATE_TIME_FORMAT.ISO_DATE)}/${pathSuffix ?? ""}`}
         >
           <ChevronLeft />
         </Link>
@@ -43,7 +48,7 @@ export const DateNavigator: FC<DateNavigatorProps> = ({ date, pathSuffix }) => {
               onSelect={(selectedDate) => {
                 if (selectedDate) {
                   navigate(
-                    `/${formatDateTime(selectedDate, DATE_TIME_FORMAT.ISO_DATE)}/${pathSuffix ?? ""}`
+                    `${basePath}/${formatDateTime(selectedDate, DATE_TIME_FORMAT.ISO_DATE)}/${pathSuffix ?? ""}`
                   );
                 }
               }}
@@ -53,7 +58,7 @@ export const DateNavigator: FC<DateNavigatorProps> = ({ date, pathSuffix }) => {
       </div>
       <Button asChild variant={"outline"}>
         <Link
-          to={`/${formatDateTime(nextDate, DATE_TIME_FORMAT.ISO_DATE)}/${pathSuffix ?? ""}`}
+          to={`${basePath}/${formatDateTime(nextDate, DATE_TIME_FORMAT.ISO_DATE)}/${pathSuffix ?? ""}`}
         >
           <ChevronRight />
         </Link>
