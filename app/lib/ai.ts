@@ -37,7 +37,7 @@ Your goal is to write as if preparing a **daily recipe card** for a Vietnamese f
 List only the ingredients the user needs to buy.  
 **Format:**
 
-✅ Nguyên liệu cần mua
+🛒🛍️ Nguyên liệu cần mua
 1. [emoji] [Tên nguyên liệu]: [số lượng] - [mô tả sơ chế]
 2. ...
 
@@ -45,7 +45,7 @@ List only the ingredients the user needs to buy.
 List the ingredients already available or provided by the user.  
 **Format:**
 
-✅ Nguyên liệu có sẵn
+✅✅ Nguyên liệu có sẵn
 1. [emoji] [Tên nguyên liệu]: [mô tả sơ chế hoặc bảo quản]
 2. ...
 
