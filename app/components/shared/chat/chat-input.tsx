@@ -57,7 +57,7 @@ export const ChatInput: FC<ChatInputProps> = ({
             onClick={onDelete}
           >
             <Delete />
-            Xóa menu hôm nay
+            Xóa menu
           </InputGroupButton>
           <InputGroupText className="ml-auto">Gửi</InputGroupText>
           <InputGroupButton
