@@ -87,7 +87,7 @@ export const MenuDetails: FC<MenuDetailProps> = ({
       </div>
       <div className="text-center fixed z-10 bottom-0 left-0 right-0 p-2 bg-gradient-to-b from-white/0 to-white flex items-center gap-2 justify-center">
         <Button asChild className="shadow-xl" size={"lg"} variant={"outline"}>
-          <Link to={`/${date}/chat`}>
+          <Link to={`/${formatDateTime(date, DATE_TIME_FORMAT.ISO_DATE)}/chat`}>
             <ChefHat /> Chat Bếp AI
           </Link>
         </Button>
