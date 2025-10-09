@@ -57,7 +57,7 @@ Provide step-by-step cooking directions, easy to follow for home cooks.
 	•	Always use friendly, clear, and instructive language.
 `;
 
-export const summaryPrompt = (content: string) => `
+export const summaryPrompt = `
 Based on the content provided below, summarize the dishes and output the result in the following JSON structure:
 
 {
@@ -73,6 +73,4 @@ Your task:
 	•	Return only a JSON object following the structure above.
 	•	Do not include explanations, text outside the JSON, or markdown formatting.
 
-Input:
-${content}
 `;

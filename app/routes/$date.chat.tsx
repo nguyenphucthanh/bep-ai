@@ -150,7 +150,7 @@ export default function DatePage({
               <p>
                 {loaderData?.menu?.summary ? (
                   <div className="space-y-4">
-                    <div className="text-3xl font-extrabold">
+                    <div className="text-xl font-extrabold">
                       {loaderData.menu.emoji} {loaderData.menu.summary}
                     </div>
                     <ScrollArea className="h-[60vh]" type="always">

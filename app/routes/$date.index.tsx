@@ -40,10 +40,10 @@ export default function DateSummary({ params }: Route.ComponentProps) {
       {loaderData?.content ? (
         <>
           <h3 className="text-5xl text-center">{loaderData?.emoji}</h3>
-          <h1 className="text-3xl font-extrabold text-center">
+          <h1 className="text-3xl font-extrabold text-center max-w-3xl mx-auto">
             {loaderData.summary}
           </h1>
-          <div className="leading-loose prose pb-10">
+          <div className="leading-loose prose pb-10 mx-auto">
             <Markdown>{loaderData.content}</Markdown>
           </div>
           <div className="text-center fixed z-10 bottom-0 left-0 right-0 p-2 bg-gradient-to-b from-white/0 to-white flex items-center gap-2 justify-center">

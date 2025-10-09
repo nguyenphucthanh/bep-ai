@@ -29,7 +29,16 @@ export async function action({ request }: Route.ActionArgs) {
 
   const response = await aiClient.responses.create({
     model: "gpt-3.5-turbo",
-    input: summaryPrompt(content),
+    input: [
+      {
+        role: "system",
+        content: summaryPrompt,
+      },
+      {
+        role: "user",
+        content,
+      },
+    ],
   });
 
   const parsedData = menuSchema.safeParse(JSON.parse(response.output_text));
