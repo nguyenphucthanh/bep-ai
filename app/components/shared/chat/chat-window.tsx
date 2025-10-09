@@ -16,9 +16,9 @@ const suggestion = [
   {
     label: "Gợi ý từ nguyên liệu 💫",
     prompt:
-      "Tôi có sẵn một số nguyên liệu cơ bản, bạn hãy gợi ý cho tôi một vài món nhé! Tôi sẽ cung cấp ngay nên đừng vội gợi ý gì nhé.",
+      "Tôi có sẵn một số nguyên liệu cơ bản, bạn hãy gợi ý cho tôi một menu gồm món chính (thịt, cá...), món xào, và món canh! Tôi sẽ cung cấp ngay nên đừng vội gợi ý gì nhé.",
   },
-  { label: "Menu cơ bản 🍽️", prompt: "Hãy gợi ý cho tôi một menu cơ bản nhé!" },
+  { label: "Menu cơ bản 🍽️", prompt: "Hãy gợi ý cho tôi một menu cơ bản bao gồm món chính (thịt, cá...), món xào, và món canh nhé! Tôi sẽ mua nguyên liệu theo gợi ý của bạn." },
   {
     label: "Tôi đang bí 😖",
     prompt:
