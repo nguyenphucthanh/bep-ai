@@ -114,49 +114,49 @@ export default function DatePage({
   };
   return (
     <div>
-      <DateNavigator date={date} pathSuffix="chat" />
-      <div className="text-center my-4">
-        {loaderData?.menu?.content && (
-          <Drawer>
-            <DrawerTrigger asChild>
-              <Button className="md:hidden">
-                <Check />
-                Xem thực đơn đã chốt
-              </Button>
-            </DrawerTrigger>
-            <DrawerContent>
-              <DrawerHeader>
-                <DrawerTitle className="text-3xl">
-                  {loaderData.menu.emoji}
-                </DrawerTitle>
-                <DrawerDescription className="text-xl font-extrabold text-neutral-700">
-                  {loaderData.menu.summary}
-                </DrawerDescription>
-              </DrawerHeader>
-              <div className="leading-loose p-4">
-                <ScrollArea className="h-[30vh] text-left" type="always">
-                  <div className="prose">
-                    <Markdown>{loaderData.menu.content}</Markdown>
-                  </div>
-                </ScrollArea>
-              </div>
-              <DrawerFooter>
-                <Button onClick={copyHandler} variant={"outline"}>
-                  <Copy /> Copy
-                </Button>
-                <Button onClick={shareHandler} variant={"outline"}>
-                  <Share /> Share
-                </Button>
-                <DrawerClose asChild>
-                  <Button variant="ghost">Đóng</Button>
-                </DrawerClose>
-              </DrawerFooter>
-            </DrawerContent>
-          </Drawer>
-        )}
-      </div>
       <div className="grid gap-4 grid-cols-1 md:grid-cols-5 mt-4">
         <div className="md:col-span-3">
+          <DateNavigator date={date} pathSuffix="chat" />
+          <div className="text-center my-4">
+            {loaderData?.menu?.content && (
+              <Drawer>
+                <DrawerTrigger asChild>
+                  <Button className="md:hidden">
+                    <Check />
+                    Xem thực đơn đã chốt
+                  </Button>
+                </DrawerTrigger>
+                <DrawerContent>
+                  <DrawerHeader>
+                    <DrawerTitle className="text-3xl">
+                      {loaderData.menu.emoji}
+                    </DrawerTitle>
+                    <DrawerDescription className="text-xl font-extrabold text-neutral-700">
+                      {loaderData.menu.summary}
+                    </DrawerDescription>
+                  </DrawerHeader>
+                  <div className="leading-loose p-4">
+                    <ScrollArea className="h-[30vh] text-left" type="always">
+                      <div className="prose">
+                        <Markdown>{loaderData.menu.content}</Markdown>
+                      </div>
+                    </ScrollArea>
+                  </div>
+                  <DrawerFooter>
+                    <Button onClick={copyHandler} variant={"outline"}>
+                      <Copy /> Copy
+                    </Button>
+                    <Button onClick={shareHandler} variant={"outline"}>
+                      <Share /> Share
+                    </Button>
+                    <DrawerClose asChild>
+                      <Button variant="ghost">Đóng</Button>
+                    </DrawerClose>
+                  </DrawerFooter>
+                </DrawerContent>
+              </Drawer>
+            )}
+          </div>
           <ChatWindow
             action={`/${formatDateTime(date, DATE_TIME_FORMAT.ISO_DATE)}/chat`}
             messages={messages}

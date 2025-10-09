@@ -79,7 +79,7 @@ export const ChatWindow: FC<ChatWindowProps> = ({ messages, action }) => {
       className="relative h-[calc(100vh_-_180px)] grid grid-cols-1 grid-rows-1 gap-4"
       ref={chatWindow}
     >
-      <div>
+      <div className="">
         <ChatMessages
           messages={displayedMessages}
           isResponding={fetcher.state === "submitting"}
