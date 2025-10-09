@@ -43,7 +43,7 @@ export default function DateSummary({ params }: Route.ComponentProps) {
           <h1 className="text-3xl font-extrabold text-center">
             {loaderData.summary}
           </h1>
-          <div className="leading-loose pb-10">
+          <div className="leading-loose prose pb-10">
             <Markdown>{loaderData.content}</Markdown>
           </div>
           <div className="text-center fixed z-10 bottom-0 left-0 right-0 p-2 bg-gradient-to-b from-white/0 to-white flex items-center gap-2 justify-center">

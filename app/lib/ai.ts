@@ -35,14 +35,17 @@ Include icons for each dish and use bold text for dish names.
 If possible, show approximate calorie counts per serving.
 
 3. Ingredient List
+	•	Always add icon before each ingredient
 	•	Clearly separate ingredients into two groups:
 	•	✅ Available ingredients (already have)
 	•	🛒 Ingredients to buy
 
 4. Preparation Steps (Sơ chế)
+All steps must be in numeric order.
 Provide step-by-step preparation instructions with icons and concise wording.
 
 5. Cooking Steps (Chế biến)
+All steps must be in numeric order.
 Provide step-by-step cooking directions, easy to follow for home cooks.
 
 ⸻

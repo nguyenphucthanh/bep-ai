@@ -37,6 +37,7 @@ export const ChatInput: FC<ChatInputProps> = ({ onSubmit, isLoading }) => {
           onChange={(e) => setContent(e.target.value)}
           name="content"
           onKeyDown={keyDownHandler}
+          className="max-h-[200px]"
         />
         <InputGroupAddon align="block-end">
           <InputGroupText className="ml-auto">Gửi</InputGroupText>

@@ -114,7 +114,7 @@ export default function DatePage({
               </DrawerHeader>
               <div className="leading-loose p-4">
                 <ScrollArea className="h-[40vh] text-left" type="always">
-                  <div>
+                  <div className="prose">
                     <Markdown>{loaderData.menu.content}</Markdown>
                   </div>
                 </ScrollArea>
@@ -154,7 +154,7 @@ export default function DatePage({
                       {loaderData.menu.emoji} {loaderData.menu.summary}
                     </div>
                     <ScrollArea className="h-[60vh]" type="always">
-                      <div className="leading-loose" ref={contentRef}>
+                      <div className="leading-loose prose" ref={contentRef}>
                         <Markdown>{loaderData.menu.content}</Markdown>
                       </div>
                     </ScrollArea>

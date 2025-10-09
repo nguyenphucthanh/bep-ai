@@ -50,7 +50,7 @@ export const ChatBaloon: FC<ChatBaloonProps> = ({
     >
       <div
         className={cx(
-          "p-4 py-2 rounded-lg",
+          "p-4 py-2 rounded-lg group",
           responseRole === "user"
             ? "bg-blue-500 text-white  max-w-[70%]"
             : "bg-neutral-50  w-full"
@@ -66,13 +66,17 @@ export const ChatBaloon: FC<ChatBaloonProps> = ({
           <>
             <div className="leading-loose" ref={ref}>
               {responseRole === "user" ? (
-                <pre className="font-sans whitespace-break-spaces max-w-full">{content}</pre>
+                <pre className="font-sans whitespace-break-spaces max-w-full">
+                  {content}
+                </pre>
               ) : (
-                <Markdown>{content}</Markdown>
+                <div className="prose">
+                  <Markdown>{content}</Markdown>
+                </div>
               )}
             </div>
             {responseRole === "assistant" && (
-              <div className="flex gap-2 justify-end">
+              <div className="flex gap-2 justify-end mt-4 opacity-50 group-hover:opacity-100">
                 <Button
                   variant={"default"}
                   onClick={() => saveMenuHandler(content)}

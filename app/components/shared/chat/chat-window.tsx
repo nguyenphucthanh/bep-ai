@@ -14,9 +14,9 @@ export type ChatWindowProps = {
 
 const suggestion = [
   {
-    label: "Gợi ý từ nguyên liệu có sẵn 💫",
+    label: "Gợi ý từ nguyên liệu 💫",
     prompt:
-      "Tôi có sẵn một số nguyên liệu cơ bản, bạn hãy gợi ý cho tôi một vài món nhé!",
+      "Tôi có sẵn một số nguyên liệu cơ bản, bạn hãy gợi ý cho tôi một vài món nhé! Tôi sẽ cung cấp ngay nên đừng vội gợi ý gì nhé.",
   },
   { label: "Menu cơ bản 🍽️", prompt: "Hãy gợi ý cho tôi một menu cơ bản nhé!" },
   {
