@@ -1,7 +1,7 @@
 import type { Route } from "./+types/$date.index";
 import { DATE_TIME_FORMAT, formatDateTime } from "~/lib/datetime";
 import Markdown from "react-markdown";
-import { ChefHat, CookingPot } from "lucide-react";
+import { ChefHat, CookingPot, Share } from "lucide-react";
 import {
   Empty,
   EmptyHeader,
@@ -19,6 +19,21 @@ export default function DateSummary({ params }: Route.ComponentProps) {
   const date = parse(params.date, DATE_TIME_FORMAT.ISO_DATE, new Date());
   const loaderData = useRouteLoaderData("date");
 
+  const shareHandler = () => {
+    if (typeof navigator.share === "function") {
+      navigator.share({
+        title: "Thực đơn Bếp AI",
+        text: `Thực đơn Bếp AI cho ngày ${formatDateTime(
+          date,
+          DATE_TIME_FORMAT.DATE
+        )}`,
+        url: `https://bep.ai/menu/${params.date}`,
+      });
+    } else {
+      navigator.clipboard.writeText(`https://bep.ai/menu/${params.date}`);
+    }
+  };
+
   return (
     <div className="space-y-4">
       <DateNavigator date={date} />
@@ -31,11 +46,19 @@ export default function DateSummary({ params }: Route.ComponentProps) {
           <div className="leading-loose pb-10">
             <Markdown>{loaderData.content}</Markdown>
           </div>
-          <div className="text-center fixed z-10 bottom-0 left-0 right-0 p-2 bg-gradient-to-b from-white/0 to-white">
-            <Button asChild className="shadow-xl" size={"lg"}>
+          <div className="text-center fixed z-10 bottom-0 left-0 right-0 p-2 bg-gradient-to-b from-white/0 to-white flex items-center gap-2 justify-center">
+            <Button asChild className="shadow-xl" size={"lg"} variant={"outline"}>
               <Link to={`/${params.date}/chat`}>
                 <ChefHat /> Chat Bếp AI
               </Link>
+            </Button>
+            <Button
+              className="shadow-xl"
+              size={"lg"}
+              onClick={shareHandler}
+              variant={"outline"}
+            >
+              <Share /> Chia sẻ
             </Button>
           </div>
         </>
