@@ -53,10 +53,10 @@ export default function DatePage({ params, loaderData }: Route.ComponentProps) {
           date,
           DATE_TIME_FORMAT.DATE
         )}`,
-        url: `https://bep.ai/menu/${params.date}`,
+        url: `${location.origin}/menu/${params.date}`,
       });
     } else {
-      navigator.clipboard.writeText(`https://bep.ai/menu/${params.date}`);
+      navigator.clipboard.writeText(`${location.origin}/menu/${params.date}`);
     }
   };
 
