@@ -14,7 +14,8 @@ import {
   EmptyTitle,
 } from "@/components/ui/empty";
 import { Link } from "react-router";
-import { ChefHat, CookingPot, Share } from "lucide-react";
+import { ChefHat, CookingPot, Copy, Share } from "lucide-react";
+import { toast } from "sonner";
 
 export async function clientLoader({ params }: Route.ClientLoaderArgs) {
   const menu = await getMenuByDate(
@@ -44,6 +45,11 @@ export function meta({ params, loaderData }: Route.MetaArgs) {
 
 export default function DatePage({ params, loaderData }: Route.ComponentProps) {
   const date = parse(params.date, DATE_TIME_FORMAT.ISO_DATE, new Date());
+
+  const copyHandler = () => {
+    navigator.clipboard.writeText(loaderData?.content ?? "")
+    toast("Copied to clipboard!")
+  }
 
   const shareHandler = () => {
     if (typeof navigator.share === "function") {
@@ -82,6 +88,14 @@ export default function DatePage({ params, loaderData }: Route.ComponentProps) {
               <Link to={`/${params.date}/chat`}>
                 <ChefHat /> Chat Bếp AI
               </Link>
+            </Button>
+            <Button
+              className="shadow-xl"
+              size={"lg"}
+              onClick={copyHandler}
+              variant={"outline"}
+            >
+              <Copy /> Copy
             </Button>
             <Button
               className="shadow-xl"

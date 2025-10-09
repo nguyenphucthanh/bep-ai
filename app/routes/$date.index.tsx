@@ -1,7 +1,7 @@
 import type { Route } from "./+types/$date.index";
 import { DATE_TIME_FORMAT, formatDateTime } from "~/lib/datetime";
 import Markdown from "react-markdown";
-import { ChefHat, CookingPot, Share } from "lucide-react";
+import { ChefHat, CookingPot, Copy, Share } from "lucide-react";
 import {
   Empty,
   EmptyHeader,
@@ -14,10 +14,16 @@ import { Button } from "@/components/ui/button";
 import { Link, useRouteLoaderData } from "react-router";
 import { parse } from "date-fns";
 import { DateNavigator } from "~/components/shared/date-navigator";
+import { toast } from "sonner";
 
 export default function DateSummary({ params }: Route.ComponentProps) {
   const date = parse(params.date, DATE_TIME_FORMAT.ISO_DATE, new Date());
   const loaderData = useRouteLoaderData("date");
+
+  const copyHandler = () => {
+    navigator.clipboard.writeText(loaderData?.content ?? "");
+    toast("Copied to clipboard!");
+  };
 
   const shareHandler = () => {
     if (typeof navigator.share === "function") {
@@ -47,10 +53,23 @@ export default function DateSummary({ params }: Route.ComponentProps) {
             <Markdown>{loaderData.content}</Markdown>
           </div>
           <div className="text-center fixed z-10 bottom-0 left-0 right-0 p-2 bg-gradient-to-b from-white/0 to-white flex items-center gap-2 justify-center">
-            <Button asChild className="shadow-xl" size={"lg"} variant={"outline"}>
+            <Button
+              asChild
+              className="shadow-xl"
+              size={"lg"}
+              variant={"outline"}
+            >
               <Link to={`/${params.date}/chat`}>
                 <ChefHat /> Chat Bếp AI
               </Link>
+            </Button>
+            <Button
+              className="shadow-xl"
+              size={"lg"}
+              onClick={copyHandler}
+              variant={"outline"}
+            >
+              <Copy /> Copy
             </Button>
             <Button
               className="shadow-xl"

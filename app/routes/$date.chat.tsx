@@ -19,7 +19,7 @@ import {
   EmptyTitle,
 } from "~/components/ui/empty";
 import Markdown from "react-markdown";
-import { Check, Copy } from "lucide-react";
+import { Check, Copy, Share } from "lucide-react";
 import {
   Drawer,
   DrawerClose,
@@ -32,7 +32,6 @@ import {
 } from "@/components/ui/drawer";
 import { Button } from "~/components/ui/button";
 import { ScrollArea } from "~/components/ui/scroll-area";
-import { useRef } from "react";
 import { toast } from "sonner";
 import { createMenuByDate, getMenuByDate, updateMenuByDate } from "~/lib/menu";
 import { DateNavigator } from "~/components/shared/date-navigator";
@@ -84,11 +83,22 @@ export default function DatePage({
 }: Route.ComponentProps) {
   const date = parse(params.date, DATE_TIME_FORMAT.ISO_DATE, new Date());
   const messages = actionData ?? loaderData?.chatMessages ?? [];
-  const contentRef = useRef<HTMLDivElement>(null);
   const copyHandler = () => {
-    if (contentRef.current) {
-      navigator.clipboard.writeText(contentRef.current.innerText);
-      toast("Copied to clipboard");
+    navigator.clipboard.writeText(loaderData?.menu?.content ?? "");
+    toast("Copied to clipboard");
+  };
+  const shareHandler = () => {
+    if (typeof navigator.share === "function") {
+      navigator.share({
+        title: "Thực đơn Bếp AI",
+        text: `Thực đơn Bếp AI cho ngày ${formatDateTime(
+          date,
+          DATE_TIME_FORMAT.DATE
+        )}`,
+        url: `${location.origin}/menu/${params.date}`,
+      });
+    } else {
+      navigator.clipboard.writeText(`${location.origin}/menu/${params.date}`);
     }
   };
   return (
@@ -105,7 +115,7 @@ export default function DatePage({
             </DrawerTrigger>
             <DrawerContent>
               <DrawerHeader>
-                <DrawerTitle className="text-6xl">
+                <DrawerTitle className="text-3xl">
                   {loaderData.menu.emoji}
                 </DrawerTitle>
                 <DrawerDescription className="text-xl font-extrabold text-neutral-700">
@@ -113,18 +123,21 @@ export default function DatePage({
                 </DrawerDescription>
               </DrawerHeader>
               <div className="leading-loose p-4">
-                <ScrollArea className="h-[40vh] text-left" type="always">
+                <ScrollArea className="h-[30vh] text-left" type="always">
                   <div className="prose">
                     <Markdown>{loaderData.menu.content}</Markdown>
                   </div>
                 </ScrollArea>
               </div>
               <DrawerFooter>
-                <Button onClick={copyHandler}>
+                <Button onClick={copyHandler} variant={"outline"}>
                   <Copy /> Copy
                 </Button>
+                <Button onClick={shareHandler} variant={"outline"}>
+                  <Share /> Share
+                </Button>
                 <DrawerClose asChild>
-                  <Button variant="outline">Đóng</Button>
+                  <Button variant="ghost">Đóng</Button>
                 </DrawerClose>
               </DrawerFooter>
             </DrawerContent>
@@ -145,6 +158,16 @@ export default function DatePage({
               <CardDescription>
                 {formatDateTime(date, DATE_TIME_FORMAT.DATE)}
               </CardDescription>
+              {loaderData?.menu?.content && (
+                <div className="flex items-center gap-2">
+                  <Button variant={"outline"} onClick={copyHandler}>
+                    <Copy /> Copy
+                  </Button>
+                  <Button variant={"outline"} onClick={shareHandler}>
+                    <Share /> Share
+                  </Button>
+                </div>
+              )}
             </CardHeader>
             <CardContent>
               <p>
@@ -154,7 +177,7 @@ export default function DatePage({
                       {loaderData.menu.emoji} {loaderData.menu.summary}
                     </div>
                     <ScrollArea className="h-[60vh]" type="always">
-                      <div className="leading-loose prose" ref={contentRef}>
+                      <div className="leading-loose prose">
                         <Markdown>{loaderData.menu.content}</Markdown>
                       </div>
                     </ScrollArea>
@@ -172,13 +195,6 @@ export default function DatePage({
                 )}
               </p>
             </CardContent>
-            <CardFooter>
-              {loaderData?.menu?.content && (
-                <Button variant={"outline"} onClick={copyHandler}>
-                  <Copy /> Copy
-                </Button>
-              )}
-            </CardFooter>
           </Card>
         </div>
       </div>

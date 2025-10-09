@@ -1,6 +1,6 @@
 import { cx } from "class-variance-authority";
 import { Copy, Save } from "lucide-react";
-import { useRef, type FC } from "react";
+import { type FC } from "react";
 import Markdown from "react-markdown";
 import { useFetcher, useParams } from "react-router";
 import { toast } from "sonner";
@@ -19,13 +19,10 @@ export const ChatBaloon: FC<ChatBaloonProps> = ({
   isResponding,
 }) => {
   const params = useParams();
-  const ref = useRef<HTMLDivElement>(null);
   const fetcher = useFetcher();
   const copyHandler = () => {
-    if (ref.current) {
-      navigator.clipboard.writeText(ref.current.textContent ?? "");
-      toast("Copied to clipboard");
-    }
+    navigator.clipboard.writeText(content ?? "");
+    toast("Copied to clipboard");
   };
 
   const saveMenuHandler = async (content: string) => {
@@ -64,7 +61,7 @@ export const ChatBaloon: FC<ChatBaloonProps> = ({
           </div>
         ) : (
           <>
-            <div className="leading-loose" ref={ref}>
+            <div className="leading-loose">
               {responseRole === "user" ? (
                 <pre className="font-sans whitespace-break-spaces max-w-full">
                   {content}
