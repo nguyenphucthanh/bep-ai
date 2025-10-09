@@ -44,7 +44,7 @@ export const ChatBaloon: FC<ChatBaloonProps> = ({
   return (
     <div
       className={cx(
-        "flex items-center",
+        "flex items-center text-sm md:text-base",
         responseRole === "user" ? "justify-end" : "justify-start"
       )}
     >
@@ -65,7 +65,11 @@ export const ChatBaloon: FC<ChatBaloonProps> = ({
         ) : (
           <>
             <div className="leading-loose" ref={ref}>
-              <Markdown>{content}</Markdown>
+              {responseRole === "user" ? (
+                <pre className="font-sans whitespace-break-spaces max-w-full">{content}</pre>
+              ) : (
+                <Markdown>{content}</Markdown>
+              )}
             </div>
             {responseRole === "assistant" && (
               <div className="flex gap-2 justify-end">
@@ -73,11 +77,12 @@ export const ChatBaloon: FC<ChatBaloonProps> = ({
                   variant={"default"}
                   onClick={() => saveMenuHandler(content)}
                   disabled={fetcher.state === "submitting"}
+                  size={"sm"}
                 >
                   {fetcher.state === "submitting" ? <Spinner /> : <Save />}
                   Save
                 </Button>
-                <Button variant={"outline"} onClick={copyHandler}>
+                <Button variant={"outline"} onClick={copyHandler} size={"sm"}>
                   <Copy /> Copy
                 </Button>
               </div>
