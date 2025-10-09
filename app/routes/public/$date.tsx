@@ -40,6 +40,10 @@ export function meta({ params, loaderData }: Route.MetaArgs) {
       name: "description",
       content: `${loaderData?.emoji ?? ""} ${loaderData?.summary ?? ""}`,
     },
+    {
+        name: "og:image",
+        content: `https://bep-ai-roan.vercel.app/images/bep-ai.png`
+    }
   ];
 }
 
