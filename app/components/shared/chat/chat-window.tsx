@@ -76,15 +76,13 @@ export const ChatWindow: FC<ChatWindowProps> = ({ messages, action }) => {
 
   return (
     <div
-      className="relative h-[calc(100vh_-_180px)] grid grid-cols-1 grid-rows-1 gap-4"
+      className="relative h-[calc(100vh_-_200px)] md:h-[calc(100vh_-_150px)] grid grid-cols-1 grid-rows-1 gap-4"
       ref={chatWindow}
     >
-      <div className="">
-        <ChatMessages
-          messages={displayedMessages}
-          isResponding={fetcher.state === "submitting"}
-        />
-      </div>
+      <ChatMessages
+        messages={displayedMessages}
+        isResponding={fetcher.state === "submitting"}
+      />
       <div className="bg-white">
         {fetcher.state === "idle" && !messages.length && (
           <div className="grid md:grid-cols-3 gap-4 my-4">

@@ -19,7 +19,7 @@ import {
   EmptyTitle,
 } from "~/components/ui/empty";
 import Markdown from "react-markdown";
-import { Check, Copy, Share } from "lucide-react";
+import { Check, Copy, Share, X } from "lucide-react";
 import {
   Drawer,
   DrawerClose,
@@ -142,16 +142,18 @@ export default function DatePage({
                       </div>
                     </ScrollArea>
                   </div>
-                  <DrawerFooter>
-                    <Button onClick={copyHandler} variant={"outline"}>
+                  <DrawerFooter className="flex flex-row justify-center">
+                    <DrawerClose asChild>
+                      <Button variant="ghost" className="mr-auto">
+                        <X /> Đóng
+                      </Button>
+                    </DrawerClose>
+                    <Button onClick={copyHandler} variant={"ghost"}>
                       <Copy /> Copy
                     </Button>
-                    <Button onClick={shareHandler} variant={"outline"}>
+                    <Button onClick={shareHandler} variant={"ghost"}>
                       <Share /> Share
                     </Button>
-                    <DrawerClose asChild>
-                      <Button variant="ghost">Đóng</Button>
-                    </DrawerClose>
                   </DrawerFooter>
                 </DrawerContent>
               </Drawer>
@@ -163,7 +165,7 @@ export default function DatePage({
           />
         </div>
         <div className="md:col-span-2 hidden md:block">
-          <Card>
+          <Card className="h-[calc(100vh_-_100px)]">
             <CardHeader>
               <CardTitle>Thực đơn</CardTitle>
               <CardDescription>
@@ -180,31 +182,31 @@ export default function DatePage({
                 </div>
               )}
             </CardHeader>
-            <CardContent>
-              <p>
-                {loaderData?.menu?.summary ? (
-                  <div className="space-y-4">
-                    <div className="text-xl font-extrabold">
-                      {loaderData.menu.emoji} {loaderData.menu.summary}
-                    </div>
-                    <ScrollArea className="h-[60vh]" type="always">
+            <CardContent className="h-[calc(100%_-_112px)]">
+              {loaderData?.menu?.summary ? (
+                <div className="gap-4 grid grid-cols-1 grid-rows-[auto_auto] h-full">
+                  <div className="text-xl font-extrabold">
+                    {loaderData.menu.emoji} {loaderData.menu.summary}
+                  </div>
+                  <div className="overflow-hidden">
+                    <ScrollArea type="always" className="h-full">
                       <div className="leading-loose prose">
                         <Markdown>{loaderData.menu.content}</Markdown>
                       </div>
                     </ScrollArea>
                   </div>
-                ) : (
-                  <Empty>
-                    <EmptyHeader>
-                      <EmptyMedia variant={"icon"}>🧑‍🍳</EmptyMedia>
-                      <EmptyTitle>Chưa chốt menu</EmptyTitle>
-                    </EmptyHeader>
-                    <EmptyContent>
-                      <p>Chưa có menu cụ thể. Hãy chat để bắt đầu!</p>
-                    </EmptyContent>
-                  </Empty>
-                )}
-              </p>
+                </div>
+              ) : (
+                <Empty>
+                  <EmptyHeader>
+                    <EmptyMedia variant={"icon"}>🧑‍🍳</EmptyMedia>
+                    <EmptyTitle>Chưa chốt menu</EmptyTitle>
+                  </EmptyHeader>
+                  <EmptyContent>
+                    <p>Chưa có menu cụ thể. Hãy chat để bắt đầu!</p>
+                  </EmptyContent>
+                </Empty>
+              )}
             </CardContent>
           </Card>
         </div>
